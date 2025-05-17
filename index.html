@@ -4,17 +4,88 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="style.css/style.css" />
     <title>Лабораторная работа №2</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
-      <img src="aztuphoto.png" alt="Logotype" width="100" />
+      <img src="aztuphoto.png" alt="Логотип" width="100" />
       <h1>Лабораторная работа №2 от Mehemmed Ismayilov</h1>
       <nav>
-        <a href="index.html">Главная</a> | <a href="table.html">Таблица</a> |
-        <a href="sign_up.html">Регистрация</a> |
-        <a href="sign_in.html">Вход</a> |
-        <a href="about.html">О сайте</a>
+        <a href="#" onclick="loadPage('home')">Главная</a> |
+        <a href="#" onclick="loadPage('table')">Таблица</a> |
+        <a href="#" onclick="loadPage('sign_up')">Регистрация</a> |
+        <a href="#" onclick="loadPage('sign_in')">Вход</a> |
+        <a href="#" onclick="loadPage('about')">О сайте</a>
       </nav>
     </header>
+
+    <main>
+      <div id="content"></div>
+    </main>
+
+    <script>
+      const pages = {
+        home: `
+        <img src="main_image.jpg" alt="Изображение" width="500">
+        <p>Добро пожаловать на главную страницу!</p>
+      `,
+
+        table: `
+        <h2>Таблица 5x8</h2>
+        <table>
+          ${[...Array(5)]
+            .map(
+              (_, i) =>
+                `<tr>${[...Array(8)]
+                  .map((_, j) => `<td>${i + 1}-${j + 1}</td>`)
+                  .join("")}</tr>`
+            )
+            .join("")}
+        </table>
+      `,
+
+        sign_up: `
+        <h2>Форма регистрации</h2>
+        <form>
+          Никнейм: <input type="text"><br>
+          Email: <input type="email"><br>
+          Пароль: <input type="password"><br>
+          Описание: <textarea></textarea><br>
+          Выбор:
+          <select>
+            <option>Вариант 1</option>
+            <option>Вариант 2</option>
+          </select><br>
+          <button type="submit">Зарегистрироваться</button>
+        </form>
+      `,
+
+        sign_in: `
+        <h2>Форма входа</h2>
+        <form>
+          Логин: <input type="text"><br>
+          Пароль: <input type="password"><br>
+          <button type="submit">Войти</button>
+        </form>
+      `,
+
+        about: `
+        <h2>О сайте</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo,
+          tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec ullamcorper nulla non
+          metus auctor fringilla. Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna
+          mollis euismod.
+        </p>
+      `,
+      };
+
+      function loadPage(page) {
+        const contentDiv = document.getElementById("content");
+        contentDiv.innerHTML = pages[page] || "<p>Страница не найдена.</p>";
+      }
+
+      window.onload = () => loadPage("home");
+    </script>
   </body>
 </html>
